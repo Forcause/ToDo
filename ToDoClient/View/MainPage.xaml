@@ -11,18 +11,18 @@
         <ToolbarItem Text="Add ToDo" Command="{Binding AddToDoCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <CollectionView ItemsSource="{Binding ToDos}" Margin="5" SelectionMode="Single"
+    <CollectionView ItemsSource="{Binding ToDos}" Margin="10, 0, 10, 20" SelectionMode="Single"
                     SelectedItem="{Binding SelectedToDo}" SelectionChangedCommand="{Binding SelectionChangeCommand}">
 
         <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
         </CollectionView.ItemsLayout>
         
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="model:ToDoModel">
-                <StackLayout>
+                <StackLayout BackgroundColor="{x:StaticResource Gray900}">
                     <Label Text="{Binding ToDoName}" FontFamily="OpenSansSemiBold" FontAttributes="None" FontSize="Medium"/>
-                    <Label Text="{Binding ToDoDescription}" FontFamily="OpenSansRegular" FontAttributes="Italic" FontSize="Small"/>
+                    <Label Text="{Binding ToDoDescription}" FontFamily="OpenSansRegular" FontAttributes="None" FontSize="Small"/>
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>

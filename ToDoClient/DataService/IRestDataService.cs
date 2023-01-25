@@ -11,7 +11,7 @@ namespace ToDoClient.DataService
     {
         Task<List<ToDoModel>> GetAllToDosAsync();
         Task AddToDoAsync(ToDoModel toDoModel);
-        Task DeleteToDoAsync(string id);
+        Task DeleteToDoAsync(int id);
         Task UpdateToDoModelAsync(ToDoModel toDoModel);
 
     }

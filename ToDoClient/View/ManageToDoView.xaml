@@ -6,19 +6,20 @@
              x:DataType="viewModel:ManageToDoViewModel"
              Title="{Binding Title}">
 
+
     <Grid RowDefinitions="*, Auto" ColumnDefinitions="*,*,*" ColumnSpacing="5" Margin="10,0,10,20">
         
-        <TableView Intent="Data" Grid.Row="0" Grid.ColumnSpan="3">
-            <TableRoot Title="Manage your ToDo">
+        <TableView Intent="Data" Grid.Row="0" Grid.ColumnSpan="3" Margin="10, 0, 10, 20">
+            <TableRoot>
                 <TableSection>
-                    <EntryCell Text="{Binding SelectedToDo.ToDoName}" Placeholder="Name"/>
-                    <EntryCell Text="{Binding SelectedToDo.ToDoDescription}" Placeholder="Description"/>
+                    <EntryCell Text="{Binding EditedToDo.ToDoName}" Placeholder="Name" Label="Edit name of ToDo"/>
+                    <EntryCell Text="{Binding EditedToDo.ToDoDescription}" Placeholder="Description" Label="Edit description of ToDo"/>
                 </TableSection>
             </TableRoot>
         </TableView>
         
-        <Button Text="Save" Grid.Row="1" Grid.Column="0"/>
-        <Button Text="Delete" Grid.Row="1" Grid.Column="1"/>
+        <Button Text="Save" Grid.Row="1" Grid.Column="0" Command="{Binding SaveCommand}"/>
+        <Button Text="Delete" Grid.Row="1" Grid.Column="1" Command="{Binding DeleteCommand}"/>
         <Button Text="Cancel" Grid.Row="1" Grid.Column="2"  Command="{Binding ReturnCommand}"/>
         
     </Grid>

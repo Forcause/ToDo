@@ -48,7 +48,7 @@ namespace ToDoClient.DataService
             return;
         }
 
-        public async Task DeleteToDoAsync(string id)
+        public async Task DeleteToDoAsync(int id)
         {
             if (!HasNetworkAccess(Connectivity.Current.NetworkAccess)) return;
 
@@ -56,7 +56,7 @@ namespace ToDoClient.DataService
             {
                 var response = await _httpClient.DeleteAsync($"{_url}/todo/del/{id}");
                 
-                if (response.IsSuccessStatusCode) await Shell.Current.DisplayAlert("Add ToDo", "Successfully deleted ToDo", "Ok");
+                if (response.IsSuccessStatusCode) await Shell.Current.DisplayAlert("Delete ToDo", "Successfully deleted ToDo", "Ok");
                 else Debug.WriteLine($"----> Response problem {response.StatusCode}");
             }
             catch (Exception ex)
@@ -102,7 +102,7 @@ namespace ToDoClient.DataService
 
                 var response = await _httpClient.PutAsync($"{_url}/todo/{toDoModel.Id}", content);
                
-                if (response.IsSuccessStatusCode) await Shell.Current.DisplayAlert("Add ToDo", "Successfully updated ToDo", "Ok");
+                if (response.IsSuccessStatusCode) await Shell.Current.DisplayAlert("Update ToDo", "Successfully updated ToDo", "Ok");
                 else Debug.WriteLine($"----> Response problem {response.StatusCode}");
             }
             catch (Exception ex)

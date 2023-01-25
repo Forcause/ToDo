@@ -22,7 +22,6 @@ namespace ToDoClient.ViewModel
                 if (_selectedToDo == value) return;
 
                 _selectedToDo = value;
-                NotifyPropertyChanged();
             }
         }
 
@@ -41,9 +40,10 @@ namespace ToDoClient.ViewModel
 
         private async void SelectionChange()
         {
+            if (_selectedToDo == null) return;
             var navigationParameter = new Dictionary<string, object>()
             {
-                { nameof(SelectedToDo), _selectedToDo }
+                { "EditedToDo", _selectedToDo }
             };
 
             await Shell.Current.GoToAsync(nameof(ManageToDoView), navigationParameter);
@@ -53,7 +53,7 @@ namespace ToDoClient.ViewModel
         {
             var navigationParameter = new Dictionary<string, object>()
             {
-                { nameof(ToDoModel), new ToDoModel() }
+                { "EditedToDo", new ToDoModel() }
             };
 
             await Shell.Current.GoToAsync(nameof(ManageToDoView), navigationParameter);

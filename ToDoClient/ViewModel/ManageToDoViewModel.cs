@@ -9,21 +9,24 @@ using ToDoClient.View;
 
 namespace ToDoClient.ViewModel
 {
-    [QueryProperty(nameof(SelectedToDo), nameof(SelectedToDo))]
+    [QueryProperty(nameof(EditedToDo), nameof(EditedToDo))]
     public class ManageToDoViewModel : BaseViewModel
     {
         private readonly IRestDataService _dataService;
 
         public Command ReturnCommand { get; }
+        public Command SaveCommand { get; }
+        public Command DeleteCommand { get; }
+
+        private bool _isNew;
 
         private ToDoModel _toDoModel;
-        public ToDoModel SelectedToDo
+        public ToDoModel EditedToDo
         {
             get => _toDoModel;
             set
             {
-                if (_toDoModel == value) return;
-
+                _isNew = IsNew(value);
                 _toDoModel = value;
                 NotifyPropertyChanged();
             }
@@ -35,12 +38,33 @@ namespace ToDoClient.ViewModel
             Title = "Manage ToDo";
             _dataService = dataService;
             ReturnCommand = new Command(ReturnToMainPage);
+            SaveCommand = new Command(SaveChanges);
+            DeleteCommand = new Command(DeleteToDo);
         }
 
-        //ToDo bug with returning to the main page
+        private async void DeleteToDo()
+        {
+            await _dataService.DeleteToDoAsync(EditedToDo.Id);
+
+            ReturnToMainPage();
+        }
+
+        private async void SaveChanges()
+        {
+            if (_isNew)
+            {
+                await _dataService.AddToDoAsync(EditedToDo);
+            }
+            else await _dataService.UpdateToDoModelAsync(EditedToDo);
+            
+            ReturnToMainPage();
+        }
+
         private async void ReturnToMainPage()
         {
-            await AppShell.Current.GoToAsync(nameof(MainPage));
+            await Shell.Current.GoToAsync("..");
         }
+
+        private bool IsNew(ToDoModel toDo) => toDo.Id == 0;
     }
 }
