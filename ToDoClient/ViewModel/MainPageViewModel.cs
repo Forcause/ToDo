@@ -58,6 +58,7 @@ namespace ToDoClient.ViewModel
 
             await Shell.Current.GoToAsync(nameof(ManageToDoView), navigationParameter);
         }
+
         private async void GetAllToDos()
         {
             var toDos = await _dataService.GetAllToDosAsync();

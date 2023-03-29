@@ -17,12 +17,14 @@
         <CollectionView.ItemsLayout>
             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
         </CollectionView.ItemsLayout>
-        
+
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="model:ToDoModel">
                 <StackLayout BackgroundColor="{x:StaticResource Gray900}">
-                    <Label Text="{Binding ToDoName}" FontFamily="OpenSansSemiBold" FontAttributes="None" FontSize="Medium"/>
-                    <Label Text="{Binding ToDoDescription}" FontFamily="OpenSansRegular" FontAttributes="None" FontSize="Small"/>
+                    <Grid ColumnDefinitions="*,0.1*" RowDefinitions="Auto, Auto">
+                        <Label Grid.Column="0" Grid.Row="0" Text="{Binding ToDoName}" FontFamily="OpenSansSemiBold" FontAttributes="None" FontSize="Medium"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="{Binding ToDoDescription}" FontFamily="OpenSansRegular" FontAttributes="None" FontSize="Small"/>
+                    </Grid>
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
